@@ -1,8 +1,7 @@
 import 'package:contactlist/Entity/Contact.dart';
 
-void addContact(conacts,name,number){
-  Contact contact=new Contact(name, number);
-  print(contact.name);
-  conacts.add(contact);
-
+void addContact(List<Contact> contacts,name,number){
+  print(contacts);
+  Contact contact=Contact(name:name,number:number);
+  contacts.add(contact);
 }

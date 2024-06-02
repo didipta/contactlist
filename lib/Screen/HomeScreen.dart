@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:contactlist/Entity/Contact.dart';
 import 'package:contactlist/Utils/commonfunction.dart';
 import 'package:contactlist/Widget/AddContactlist.dart';
@@ -15,20 +17,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final  List<Contact> contacts=[];
   @override
   Widget build(BuildContext context) {
     var width=MediaQuery.of(context).size.width;
-    List<Contact> contacts=[];
 
-    _addContat(String name,String number){
-      print(name + number);
+_addContat (String name,String number) async{
+     print(contacts);
 
-      setState(() {
-        addContact(contacts, name, number);
-      });
-
-      print(contacts.length.toString());
-
+  setState(() {
+    addContact(contacts, name, number);
+  });
     }
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
                AddContact(addcontact:_addContat),
-            Text(contacts.length.toString())
+        Expanded(
+          child: ListView.builder(
+            itemCount: contacts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(contacts[index].name),
+                subtitle: Text(contacts[index].number),
+              );
+            },
+          ),
+        ),
           ],
         ),
       ),
