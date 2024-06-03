@@ -22,10 +22,17 @@ class _HomeScreenState extends State<HomeScreen> {
     var width = MediaQuery.of(context).size.width;
 
     _addContat(String name, String number) async {
-      print(contacts);
+
 
       setState(() {
         addContact(contacts, name, number);
+      });
+    }
+
+    _deleteContact( Contact contact)
+    {
+      setState(() {
+        deleteContact(contacts, contact);
       });
     }
 
@@ -55,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             Expanded(
-              child: ShowContactlist(contacts: contacts),
+              child: ShowContactlist(contacts: contacts, deletecontant:_deleteContact,),
             ),
           ],
         ),

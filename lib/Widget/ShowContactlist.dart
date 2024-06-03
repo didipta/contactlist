@@ -1,14 +1,16 @@
 import 'package:contactlist/Entity/Contact.dart';
+import 'package:contactlist/Utils/DailogBox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShowContactlist extends StatelessWidget {
   const ShowContactlist({
     super.key,
-    required this.contacts,
+    required this.contacts, required this.deletecontant,
   });
 
   final List<Contact> contacts;
+  final Function(Contact) deletecontant;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,10 @@ class ShowContactlist extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 5.0, right: 10),
               child: GestureDetector(
                 onTap: () {
-                  print("abgdfjhsgadfyas dj");
+                  dialogBox((){
+                    deletecontant(contacts[index]);
+
+                  },context,contacts[index].name , "Are you sure delete this contacts?");
                 },
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
